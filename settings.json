@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.php$",
+        "cmd": "vendor\\\\bin\\\\pint"
+      }
+    ]
+  }
+}
