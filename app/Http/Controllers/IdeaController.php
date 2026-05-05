@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class IdeaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * index Display a listing of the resource.
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class IdeaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create - form for creating a new resource.
      */
     public function create()
     {
@@ -33,6 +33,11 @@ class IdeaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        $request->validate([
+            'description' => ['required', 'min:10'],
+        ]);
+
         Idea::create([
             'description' => request('description'),
             'state' => 'pending',
