@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 
@@ -31,12 +32,14 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    // kuna storeIdeaReq extendib recuest classi siis saab selle välja vahetada ja validation tehakse automaatselt sest seee on classis defineeritud
+    public function store(IdeaRequest $request)
     {
         // dd($request->all());
-        $request->validate([
-            'description' => ['required', 'min:10'],
-        ]);
+
+        // $request->validate([
+        //     'description' => ['required', 'min:10'],
+        // ]);
 
         Idea::create([
             'description' => request('description'),
@@ -69,11 +72,12 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Idea $idea)
+    public function update(IdeaRequest $request, Idea $idea)
     {
-        $idea->update([
-            'description' => request('description'),
-        ]);
+        // kui kasutame klassi ideaRew siis seal see validation on juba sees
+        // $idea->update([
+        //     'description' => request('description'),
+        // ]);
 
         return redirect("/ideas/{$idea->id}");
     }

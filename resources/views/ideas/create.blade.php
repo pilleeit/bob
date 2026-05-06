@@ -22,7 +22,7 @@
 
           @enderror --}}
 
-        <x-form.error name='description' />
+        <x-forms.error name='description' />
       </div>
       <p class="mt-3 text-sm/6 text-gray-400">Have an idea you want to save for later?</p>
     </div>
