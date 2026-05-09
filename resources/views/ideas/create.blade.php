@@ -7,7 +7,7 @@
         <textarea id="description" 
           name="description" 
           rows="3" 
-          class="block w-full rounded-md bg-gray-600 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          class="textarea w-full @error('description') textarea-error @enderror"
           ></textarea>
 
           {{-- pikk versioon errori kuvamisest --}}
@@ -28,7 +28,7 @@
     </div>
 
     <div class="mt-6 flex items-center gap-x-6">
-      <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm">Submit</button>
+      <button type="submit" class="btn">Submit</button>
     </div>
   </form>
 

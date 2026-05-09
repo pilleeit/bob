@@ -1,17 +1,17 @@
 <x-layout>
 
 
-  <div class="mt-6 text-white">
+  <div class="card bg-neutral-50 p-6 ">
     <h2 class="font-bold">Your Idea</h2>
 
-    <div class="mt-6">
+    <div >
         {{ $idea->description }}
     </div>
   </div>
 
   <div class="mt-6">
     <a href="/ideas/{{ $idea->id }}/edit">
-      <span class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-none focus:outline-none">Edit</span>
+      <span class="btn btn-secondary">Edit</span>
     </a>
   </div>
 
