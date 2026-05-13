@@ -7,38 +7,47 @@ use App\Models\Idea;
 // use Illuminate\Support\Facades\DB; !!siin ei kasuta db fasaadi
 use Illuminate\Support\Facades\Route;
 
-// index aka main page
-Route::get('/ideas', [IdeaController::class, 'index']);
+Route::get('/', function () {
+    return 'Placeholder for home page';
+});
 
-// create aka form for creating idea
-Route::get('/ideas/create', [IdeaController::class, 'create']);
+Route::middleware('auth')->group(function () {
+    // index aka main page
+    Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth');
 
-// store
-Route::post('/ideas', [IdeaController::class, 'store']);
+    // create aka form for creating idea
+    Route::get('/ideas/create', [IdeaController::class, 'create']);
 
-// show aka single idea
-Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
+    // store
+    Route::post('/ideas', [IdeaController::class, 'store']);
 
-// edit aka form for idea
-Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit']);
+    // show aka single idea
+    Route::get('/ideas/{idea}', [IdeaController::class, 'show']);
 
-// update aka form saatmine ehk toimub peale nupu vajutamist
-Route::patch('/ideas/{idea}', [IdeaController::class, 'update']);
+    // edit aka form for idea
+    Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit']);
 
-// destroy
-Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
+    // update aka form saatmine ehk toimub peale nupu vajutamist
+    Route::patch('/ideas/{idea}', [IdeaController::class, 'update']);
 
-// temporary to try it out
-// Route::get('/delete-ideas', function () {
-//     // session()->forget('ideas');
-//     Idea::truncate();
+    // destroy
+    Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
 
-//     return redirect('/ideas');
-// });
+    // temporary to try it out
+    // Route::get('/delete-ideas', function () {
+    //     // session()->forget('ideas');
+    //     Idea::truncate();
 
-Route::get('/register', [RegisteredUserController::class, 'create']);
-Route::post('/register', [RegisteredUserController::class, 'store']);
+    //     return redirect('/ideas');
+    // });
 
-Route::get('/login', [SessionsController::class, 'create']);
-Route::post('/login', [SessionsController::class, 'store']);
-Route::delete('/logout', [SessionsController::class, 'destroy']);
+    Route::delete('/logout', [SessionsController::class, 'destroy']);
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'create']);
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+
+    Route::get('/login', [SessionsController::class, 'create'])->name('login');
+    Route::post('/login', [SessionsController::class, 'store']);
+});

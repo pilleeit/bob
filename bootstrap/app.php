@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // üks versioon suunata login lehele
+        // $middleware->redirectGuestsTo('/login');
+        $middleware->redirectUsersTo('/ideas');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
