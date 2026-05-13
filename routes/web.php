@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\SessionsController;
 use App\Http\Controllers\IdeaController;
 use App\Models\Idea;
 // use Illuminate\Support\Facades\DB; !!siin ei kasuta db fasaadi
@@ -33,3 +35,10 @@ Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy']);
 
 //     return redirect('/ideas');
 // });
+
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::get('/login', [SessionsController::class, 'create']);
+Route::post('/login', [SessionsController::class, 'store']);
+Route::delete('/logout', [SessionsController::class, 'destroy']);
