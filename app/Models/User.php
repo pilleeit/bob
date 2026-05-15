@@ -45,4 +45,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Idea::class);
     }
+
+    public function isAdmin(): bool
+    {
+        // return $this->role === 'admin'; selleks et rollipõhiselt aga meil pole user tabelis tolli praegu
+        return $this->id === 1; // only john is admin
+    }
 }

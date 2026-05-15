@@ -51,3 +51,15 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/login', [SessionsController::class, 'store']);
 });
+
+// middleware versioon
+// Route::get('/admin', function () {
+//     return 'private super secret admin stuff';
+// })->can('view-admin');
+
+// teine versioon samast asjast
+Route::get('/admin', function () {
+    Gate::authorize('view-admin');
+
+    return 'private super secret admin stuff';
+});
