@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IdeaRequest;
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,13 +15,19 @@ class IdeaController extends Controller
      */
     public function index()
     {
+
         // dd('hello'); sanity check to see if it reaches controller
-        $ideas = Idea::query()->where([
-            'User_id' => Auth::id(),
-        ])->get();
+
+        // enne kui modelis on lisatud seos useri ja idee vahel
+        // $ideas = Idea::query()->where([
+        //     'User_id' => Auth::id(),
+        // ])->get();
+
+        // inlined järgmise sisse otse
+        // $ideas = Auth::user()->ideas;
 
         return view('ideas.index', [
-            'ideas' => $ideas,
+            'ideas' => Auth::user()->ideas,
         ]);
     }
 
@@ -44,10 +51,29 @@ class IdeaController extends Controller
         //     'description' => ['required', 'min:10'],
         // ]);
 
-        Idea::create([
+        // Idea::create([
+        //     'description' => request('description'),
+        //     'state' => 'pending',
+        //     'user_id' => Auth::id(),
+        // ]);
+
+        // mingid versioonid mida chat pakkus
+        // /** @var User $user */
+        // $user = Auth::user();
+
+        // $user->ideas()->create([
+        //     'description' => request('description'),
+        //     'state' => 'pending',
+        // ]);
+
+        // $request->user()->ideas()->create([
+        //     'description' => $request->description,
+        //     'state' => 'pending',
+        // ]);
+
+        Auth::user()->ideas()->create([
             'description' => request('description'),
             'state' => 'pending',
-            'user_id' => Auth::id(),
         ]);
 
         return redirect('/ideas');

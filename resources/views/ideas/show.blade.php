@@ -1,7 +1,7 @@
 <x-layout>
 
 
-  <div class="card bg-neutral-50 p-6 ">
+  <div class="card bg-neutral-700 p-6 ">
     <h2 class="font-bold">Your Idea</h2>
 
     <div >
