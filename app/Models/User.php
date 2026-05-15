@@ -49,6 +49,6 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         // return $this->role === 'admin'; selleks et rollipõhiselt aga meil pole user tabelis tolli praegu
-        return $this->id === 1; // only john is admin
+        return $this->id === 5; // only bob is admin
     }
 }

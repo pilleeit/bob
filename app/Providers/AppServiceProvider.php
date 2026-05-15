@@ -23,18 +23,19 @@ class AppServiceProvider extends ServiceProvider
     // function (?User $user) siis ei pea olema user sisslogitud !!! nb ilma ? kontrollib lihtsalt userit mitte kas tal on õigused
     public function boot(): void
     {
-        Gate::define('view-admin', function (User $user) {
-            // return true;
-            // return $user->id === 1;
-            // return false;
+        // AUTH LESSON 4
+        // Gate::define('view-admin', function (User $user) {
+        //     // return true;
+        //     // return $user->id === 1;
+        //     // return false;
 
-            // if ($user->id === 0) {
-            //     return Response::allow();
-            // }
+        //     // if ($user->id === 0) {
+        //     //     return Response::allow();
+        //     // }
 
-            // return Response::denyAsNotFound();
+        //     // return Response::denyAsNotFound();
 
-            return $user->isAdmin() ? Response::allow() : Response::denyAsNotFound();
-        });
+        //     return $user->isAdmin() ? Response::allow() : Response::denyAsNotFound();
+        // });
     }
 }

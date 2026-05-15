@@ -52,14 +52,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionsController::class, 'store']);
 });
 
+// AUTH LESSON 4
 // middleware versioon
 // Route::get('/admin', function () {
 //     return 'private super secret admin stuff';
 // })->can('view-admin');
 
 // teine versioon samast asjast
-Route::get('/admin', function () {
-    Gate::authorize('view-admin');
+// Route::get('/admin', function () {
+//     Gate::authorize('view-admin');
 
-    return 'private super secret admin stuff';
-});
+//     return 'private super secret admin stuff';
+// });

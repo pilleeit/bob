@@ -7,6 +7,7 @@ use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -36,6 +37,10 @@ class IdeaController extends Controller
      */
     public function create()
     {
+        // !!! NÄIDIS et ainult admin saab luua ideid
+        // peab olema Idea::class mitte $idea sest veel ei ole loodud ideed, aga gate peab teadma millise policiga see kokku läheb
+        // Gate::authorize('create', Idea::class);
+
         return view('ideas.create');
     }
 
@@ -84,6 +89,14 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
+        Gate::authorize('update', $idea);
+
+        // läheb kokku selle teise asjaga, mis oli @can ja smth like that
+        // if (Auth::user()->cannot('update', $idea)) {
+        //     dd('go away BOB!!!');
+        // // siin saab siis nt auth erroreid panna või logida midagi vms
+        // }
+
         return view('ideas.show', [
             'idea' => $idea,
         ]);
@@ -94,6 +107,8 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
+        Gate::authorize('update', $idea);
+
         return view('ideas.edit', [
             'idea' => $idea,
         ]);
@@ -109,6 +124,12 @@ class IdeaController extends Controller
         //     'description' => request('description'),
         // ]);
 
+        Gate::authorize('update', $idea);
+
+        $idea->update([
+            'description' => request('description'),
+        ]);
+
         return redirect("/ideas/{$idea->id}");
     }
 
@@ -117,6 +138,7 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
+        Gate::authorize('update', $idea);
 
         $idea->delete();
 
